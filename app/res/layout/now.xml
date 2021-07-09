@@ -3,7 +3,9 @@
     android:id="@+id/nowLayout"
     android:layout_width="match_parent"
     android:layout_height="530dp"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
 
     <FrameLayout
         android:id="@+id/titleLayout"
