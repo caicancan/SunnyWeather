@@ -15,14 +15,12 @@ object SunnyWeatherNetwork {
     private suspend fun <T> Call<T>.await():T{
         return suspendCoroutine { continuation ->enqueue(object :Callback<T>{
             override fun onResponse(call: Call<T>, response: Response<T>) {
-                TODO("Not yet implemented")
                 val  body=response.body()
                 if (body!=null)continuation.resume(body)
                 else continuation.resumeWithException(RuntimeException("response body is null"))
             }
 
             override fun onFailure(call: Call<T>, t: Throwable) {
-                TODO("Not yet implemented")
                 continuation.resumeWithException(t)
             }
         }

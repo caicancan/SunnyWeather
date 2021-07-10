@@ -1,5 +1,6 @@
 package com.sunnyweather.android.logic
 
+import android.util.Log
 import androidx.lifecycle.liveData
 import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.network.SunnyWeatherNetwork
@@ -11,6 +12,7 @@ object Repository {
     fun searchPlaces(query:String)= liveData(Dispatchers.IO){
         val result=try {
             val placeResponse=SunnyWeatherNetwork.searchPlaces(query)
+            Log.i("ccc","搜索response"+placeResponse);
             if (placeResponse.status=="ok"){
                 val places=placeResponse.places
                 Result.success(places)
