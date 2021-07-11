@@ -15,6 +15,5 @@ class PlaceViewModel :ViewModel() {
     }
     fun searchPlace(query:String){
         searchLiveData.value=query
-        Log.i("ccc","搜索"+query);
     }
 }

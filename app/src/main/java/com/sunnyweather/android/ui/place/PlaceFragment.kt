@@ -32,7 +32,6 @@ class PlaceFragment:Fragment(){
         adapter= PlaceAdapter(this,viewmodel.placeList)
         recyclerView.adapter=adapter
         searchPlaceEdit.addTextChangedListener{editable->
-            Log.i("ccc","变化了"+editable.toString())
             val content =editable.toString()
             if (content.isNotEmpty()){
                 viewmodel.searchPlace(content)
@@ -44,7 +43,6 @@ class PlaceFragment:Fragment(){
             }
         }
         viewmodel.placeLiveData.observe(this, Observer { result->
-            Log.i("ccc","搜索"+result);
             val places=result.getOrNull()
             if (places!=null){
                 recyclerView.visibility=View.VISIBLE
