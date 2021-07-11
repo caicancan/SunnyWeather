@@ -3,6 +3,7 @@ package com.sunnyweather.android.logic
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import com.sunnyweather.android.logic.dao.PlaceDao
 import com.sunnyweather.android.logic.model.Place
 import com.sunnyweather.android.logic.model.Weather
 import com.sunnyweather.android.logic.network.SunnyWeatherNetwork
@@ -73,7 +74,7 @@ fun searchPlaces(query:String)= fire(Dispatchers.IO){
                 }
                 val realtimeRespons=deferredRealtime.await()
                 val dailyResponse=deferredDaily.await()
-                Log.i("ccc",""+realtimeRespons+"---"+dailyResponse)
+
                 if (realtimeRespons.status=="ok"&&dailyResponse.status=="ok"){
                     val weather= Weather(realtimeRespons.result.realtime,dailyResponse.result.daily)
                     Result.success(weather)
@@ -84,6 +85,10 @@ fun searchPlaces(query:String)= fire(Dispatchers.IO){
             }
 
     }
+
+    fun savePlace(place: Place)=PlaceDao.savePlace(place)
+    fun getSavedPlace()=PlaceDao.getSavePlace()
+    fun isPlaceSaved()=PlaceDao.isPlaceSaved()
 
     private fun<T> fire(context:CoroutineContext,block:suspend()->Result<T>)=liveData<Result<T>>(context){
         val result=try {
